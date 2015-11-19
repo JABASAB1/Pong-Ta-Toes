@@ -49,6 +49,8 @@ angular.module('myApp.game', ['ngRoute'])
 
     $interval(function () {
         $scope.potato.move();
+        $scope.player1.getPaddle().move();
+        $scope.player2.getPaddle().move();
     }, 10);
 
     function Player(paddle, score) {
@@ -68,14 +70,29 @@ angular.module('myApp.game', ['ngRoute'])
         this.h = h;
     }
 
-    var paddleWidth = $scope.width / 20;
+    Paddle.prototype.getCoordinates = function () {
+        return { x: this.x, y: this.y };
+    }
+
+    Paddle.prototype.getSize = function () {
+        return { w: this.w, h: this.h };
+    }
+
+    Paddle.prototype.move = function () {
+        this.y += this.v;
+    }
+
+    var paddleWidth = $scope.width / 50;
     var paddleHeight = $scope.height / 5;
-    var paddle1X = $scope.width / 20;
-    var paddle2X = $scope.width - ($scope.width / 20);
-    var paddleY = $scope.width / 20;
+    var paddle1X = paddleWidth;
+    var paddle2X = $scope.width - paddleWidth;
+    var paddleY = ($scope.height / 2) - (paddleHeight/2);
 
-    var paddle1 = new Paddle();
+    var paddle1 = new Paddle(paddle1X, paddleY, 0, paddleWidth, paddleHeight);
 
-    var paddle2 = new Paddle();
+    var paddle2 = new Paddle(paddle2X, paddleY, 0, paddleWidth, paddleHeight);
+
+    $scope.player1 = new Player(paddle1, 0);
+    $scope.player2 = new Player(paddle2, 0);
 
 }]);
