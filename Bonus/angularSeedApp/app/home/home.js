@@ -10,10 +10,13 @@ angular.module('myApp.home', ['ngRoute'])
 }])
 .controller('homeController', ["$scope", "$interval", "$window", function ($scope, $interval, $window) { 
 
-$scope.player1score = angular.module('gameModule').player1score;
+$scope.player1score = 0;
 $scope.player2score = 0;
 
-$scope.player1image = "sam.png";
-$scope.player2image = "gollum.png";
+$scope.player1image = "./images/sam-cartoon.png";
+$scope.player2image = "./images/gollum-cartoon.png";
+
+$scope.player1name = "Sam";
+$scope.player2name = "Gollum";
 
 }]);
