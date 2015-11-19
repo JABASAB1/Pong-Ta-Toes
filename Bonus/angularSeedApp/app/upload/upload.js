@@ -8,11 +8,11 @@ angular.module('myApp.upload', ['ngRoute'])
         controller: 'uploadController'
     });
 }])
-.controller('uploadController', ["$scope", "$interval", "$window", function ($scope, $interval, $window) {
-    $scope.samPicture = "Unset";
-    $scope.gollumPicture = "Unset";
+.controller('uploadController', ["$scope", "$interval", "$window", "pictureService", function ($scope, $interval, $window, pictureService) {
+    $scope.playerOneImage = pictureService.getPlayerOneImage();
+    $scope.playerTwoImage = pictureService.getPlayerTwoImage();
 
     $scope.debug = function () {
-        alert("Sam Picture: " + $scope.samPicture + " Gollum Picture: " + $scope.gollumPicture);
+        alert("Sam Picture: " + $scope.playerOneImage + " Gollum Picture: " + $scope.playerTwoImage);
     }
 }]);
