@@ -33,6 +33,13 @@ angular.module('myApp.game', ['ngRoute'])
     Potato.prototype.move = function () {
         this.x += this.vX;
         this.y += this.vY;
+        if (this.x + this.w*.3 < 0) {
+            $scope.player2.awardPoint();
+            $scope.potato = new Potato(potatoX, potatoY, -1, 0, potatoWidth, potatoHeight);
+        } else if (this.x + this.w*.7 > $scope.width) {
+            $scope.player1.awardPoint();
+            $scope.potato = new Potato(potatoX, potatoY, 1, 0, potatoWidth, potatoHeight);
+        }
     }
 
     Potato.prototype.accelarate = function () {
@@ -56,6 +63,10 @@ angular.module('myApp.game', ['ngRoute'])
     function Player(paddle, score) {
         this.paddle = paddle;
         this.score = score;
+    }
+
+    Player.prototype.awardPoint = function () {
+        this.score += 1;
     }
 
     Player.prototype.getPaddle = function() {
@@ -101,7 +112,7 @@ angular.module('myApp.game', ['ngRoute'])
     var paddleY = ($scope.height / 2) - (paddleHeight / 2);
     
     Paddle.prototype.move = function () {
-        if (this.y + this.v >= 0 && this.y + this.v + paddleHeight <= $scope.height) {
+        if (this.y + this.v >= 0 && this.y + this.v + this.h <= $scope.height) {
             this.y += this.v;
         } else {
         }
