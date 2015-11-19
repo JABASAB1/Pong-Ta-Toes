@@ -13,7 +13,7 @@ angular.module('myApp.home', ['ngRoute'])
 $scope.player1score = angular.module('gameModule').player1score;
 $scope.player2score = 0;
 
-$scope.player1image = "sam.png";
-$scope.player2image = "gollum.png";
+$scope.player1image = "sam-cartoon.png";
+$scope.player2image = "gollum-cartoon.png";
 
 }]);
