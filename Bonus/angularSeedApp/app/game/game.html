@@ -1,8 +1,8 @@
 <div ng-controller="gameController">
     <svg style="margin-left:10px" ng-attr-height="{{height}}" ng-attr-width="{{width}}" xlmns="http://www.w3.org/2000/svg">
         <image ng-attr-x="{{potato.getCoordinates().x}}" ng-attr-y="{{potato.getCoordinates().y}}" xlink:href="images/Potato_clip_art.svg" ng-attr-width="{{potato.getSize().w}}" ng-attr-height="{{potato.getSize().h}}" />
-        <rect ng-attr-x="{{player1.getPaddle().getCoordinates().x}}" ng-attr-y="{{player1.getPaddle().getCoordinates().y}}" ng-attr-width="{{player1.getPaddle().getSize().w}}" ng-attr-height="{{player1.getPaddle().getSize().h}}" fill="black" stroke="green"></rect>'
-        <rect ng-attr-x="{{player2.getPaddle().getCoordinates().x}}" ng-attr-y="{{player2.getPaddle().getCoordinates().y}}" ng-attr-width="{{player2.getPaddle().getSize().w}}" ng-attr-height="{{player2.getPaddle().getSize().h}}" fill="black" stroke="red"></rect>
+        <rect ng-attr-x="{{player1.getPaddle().getCoordinates().x}}" ng-attr-y="{{player1.getPaddle().getCoordinates().y}}" ng-attr-width="{{player1.getPaddle().getSize().w}}" ng-attr-height="{{player1.getPaddle().getSize().h}}" ng-attr-fill="{{player1.getPaddle().color}}" stroke="green"></rect>'
+        <rect ng-attr-x="{{player2.getPaddle().getCoordinates().x}}" ng-attr-y="{{player2.getPaddle().getCoordinates().y}}" ng-attr-width="{{player2.getPaddle().getSize().w}}" ng-attr-height="{{player2.getPaddle().getSize().h}}" ng-attr-fill="{{player2.getPaddle().color}}" stroke="red"></rect>
         <rect ng-attr-x="0" ng-attr-y="0" ng-attr-width="{{width}}" ng-attr-height="{{height}}" fill="none" stroke="black"></rect>
     </svg>
 </div>

@@ -38,7 +38,18 @@ angular.module('myApp.game', ['ngRoute'])
         }
 
         if (paddle) {
-            this.vX = (this.vX) * -1;
+            if (paddle.power) {
+                if (this.vX > 0) {
+                    this.vX += 1;
+                } else {
+                    this.vX -= 1;
+                }
+                this.vX = (this.vX) * -1;
+            } else if (this.vX > 3 || this.vX < -3) {
+                this.vX = (this.vX) * -.3;
+            } else {
+                this.vX = (this.vX) * -1;
+            }
         }
         
 
@@ -125,12 +136,20 @@ angular.module('myApp.game', ['ngRoute'])
         return this.paddle;
     }
 
-    function Paddle(x, y, v, w, h) {
+    function Paddle(x, y, v, w, h, color) {
         this.x = x;
         this.y = y;
         this.v = v;
         this.w = w;
         this.h = h;
+        this.hit = false;
+
+        var p = this;
+
+        $interval(function () {
+            p.hit = true;
+            p.color = color;
+        }, 10000, 1);
     }
 
     Paddle.prototype.getCoordinates = function () {
@@ -190,9 +209,38 @@ angular.module('myApp.game', ['ngRoute'])
         
     }
 
-    var paddle1 = new Paddle(paddle1X, paddleY, 0, paddleWidth, paddleHeight);
+    Paddle.prototype.powerHit = function (left) {
+        if (this.hit) {
+            if (left) {
+                this.x -= this.w;
+            } else {
+                this.x += this.w;
+            }
+            this.hit = false;
+            var color = this.color;
+            this.power = true;
+            var p = this;
 
-    var paddle2 = new Paddle(paddle2X, paddleY, 0, paddleWidth, paddleHeight);
+            $interval(function () {
+                if (left) {
+                    p.x += p.w;
+                } else {
+                    p.x -= p.w;
+                }
+                p.power = false;
+                p.color = "Black";
+            }, 100, 1);
+
+            $interval(function () {
+                p.hit = true;
+                p.color = color;
+            }, 10000, 1);
+        }
+    }
+
+    var paddle1 = new Paddle(paddle1X, paddleY, 0, paddleWidth, paddleHeight, 'green');
+
+    var paddle2 = new Paddle(paddle2X, paddleY, 0, paddleWidth, paddleHeight, 'red');
 
     $scope.player1 = new Player(paddle1, 0);
     $scope.player2 = new Player(paddle2, 0);
@@ -207,6 +255,10 @@ angular.module('myApp.game', ['ngRoute'])
                 paddle2.accelerate(false);
                 //down
                 break;
+            case 37:
+                //left
+                paddle2.powerHit(true);
+                break;
             case 83:
                 //up
                 paddle1.accelerate(true);
@@ -214,6 +266,11 @@ angular.module('myApp.game', ['ngRoute'])
             case 88:
                 //down
                 paddle1.accelerate(false);
+                break;
+            case 68:
+            case 67:
+                //right
+                paddle1.powerHit(false);
                 break;
         }
     });
