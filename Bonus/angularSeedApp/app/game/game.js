@@ -31,12 +31,13 @@ angular.module('myApp.game', ['ngRoute'])
     }
 
     Potato.prototype.bounce = function (paddle) {
+        if (this.vX > 0) {
+            this.vX += .2;
+        } else {
+            this.vX -= .2;
+        }
+
         if (paddle) {
-            if (this.vX > 0) {
-                this.vX + .2;
-            } else {
-                this.vX - .2;
-            }
             this.vX = (this.vX) * -1;
         }
         
