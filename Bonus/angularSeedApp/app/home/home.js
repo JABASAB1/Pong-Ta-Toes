@@ -8,7 +8,7 @@ angular.module('myApp.home', ['ngRoute'])
         controller: 'homeController'
     });
 }])
-.controller('homeController', ["$scope", "$interval", "$window", function ($scope, $interval, $window) { }]);
+.controller('homeController', ["$scope", "$interval", "$window", function ($scope, $interval, $window) { 
 
 $scope.player1score = angular.module('gameModule').player1score;
 $scope.player2score = 0;
@@ -16,3 +16,4 @@ $scope.player2score = 0;
 $scope.player1image = "sam.png";
 $scope.player2image = "gollum.png";
 
+}]);
