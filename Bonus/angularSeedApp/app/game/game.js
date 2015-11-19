@@ -3,13 +3,13 @@
 angular.module('myApp.game', ['ngRoute'])
 
 .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/view1', {
+    $routeProvider.when('/game', {
         templateUrl: 'game/game.html',
         controller: 'gameController'
     });
 }])
 
-.controller('gameController', ["$scope", "$interval", "$window", function ($scope, $interval, $window) {
+.controller('gameController', ["$scope", "$interval", "$window", "$document", function ($scope, $interval, $window, $document) {
     $scope.height = $window.innerHeight * .8;
     $scope.width = $window.innerWidth * .8;
 
@@ -78,15 +78,34 @@ angular.module('myApp.game', ['ngRoute'])
         return { w: this.w, h: this.h };
     }
 
-    Paddle.prototype.move = function () {
-        this.y += this.v;
+    Paddle.prototype.accelerate = function (up) {
+        if (up) {
+            this.v = -2;
+        } else {
+            this.v = 2;
+        }
+    }
+
+    Paddle.prototype.stop = function (up) {
+        if (up && this.v < 0) {
+            this.v = 0;
+        } else if (!up && this.v > 0) {
+            this.v = 0;
+        }
     }
 
     var paddleWidth = $scope.width / 50;
     var paddleHeight = $scope.height / 5;
     var paddle1X = paddleWidth;
-    var paddle2X = $scope.width - paddleWidth;
-    var paddleY = ($scope.height / 2) - (paddleHeight/2);
+    var paddle2X = $scope.width - paddleWidth*2;
+    var paddleY = ($scope.height / 2) - (paddleHeight / 2);
+    
+    Paddle.prototype.move = function () {
+        if (this.y + this.v >= 0 && this.y + this.v + paddleHeight <= $scope.height) {
+            this.y += this.v;
+        } else {
+        }
+    }
 
     var paddle1 = new Paddle(paddle1X, paddleY, 0, paddleWidth, paddleHeight);
 
@@ -94,5 +113,47 @@ angular.module('myApp.game', ['ngRoute'])
 
     $scope.player1 = new Player(paddle1, 0);
     $scope.player2 = new Player(paddle2, 0);
+
+    $document.bind('keydown', function (e) {
+        switch (e.which) {
+            case 38:
+                //up
+                paddle2.accelerate(true);
+                break;
+            case 40:
+                paddle2.accelerate(false);
+                //down
+                break;
+            case 83:
+                //up
+                paddle1.accelerate(true);
+                break;
+            case 88:
+                //down
+                paddle1.accelerate(false);
+                break;
+        }
+    });
+
+    $document.bind('keyup', function (e) {
+        switch (e.which) {
+            case 38:
+                //up
+                paddle2.stop(true);
+                break;
+            case 40:
+                //down
+                paddle2.stop(false);
+                break;
+            case 83:
+                //up
+                paddle1.stop(true);
+                break;
+            case 88:
+                //down
+                paddle1.stop(false);
+                break;
+        }
+    });
 
 }]);
