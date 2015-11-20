@@ -35,7 +35,6 @@ header {
 
 .player {
 	text-align: center;
-	margin-left: 5%;
 }
 
 #player1 {
@@ -47,8 +46,8 @@ header {
 }
 
 #players {
-	margin-left: auto;
-	margin-right: auto;
+    display: table;
+    margin: 0 auto;
 }
 
 #game {
