@@ -6,6 +6,7 @@ angular.module('myApp', [
   'myApp.game',
   'myApp.home',
   'myApp.upload',
+  'myApp.about',
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
