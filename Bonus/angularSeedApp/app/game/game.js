@@ -198,7 +198,7 @@ angular.module('myApp.game', ['ngRoute'])
     var paddleY = ($scope.height / 2) - (paddleHeight / 2);
     
     Paddle.prototype.move = function () {
-        if (this.y + this.v >= 0 && this.y + this.v + this.h <= $scope.height) {
+        if (this.y + this.v >= 5 && this.y + this.v + this.h <= $scope.height-5) {
             this.y += this.v;
         }
     }
