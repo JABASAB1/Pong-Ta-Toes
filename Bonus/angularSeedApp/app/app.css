@@ -44,7 +44,7 @@ header {
 }
 
 #player2 {
-	float: left;
+	float: right;
 }
 
 #players {
@@ -55,5 +55,4 @@ header {
 #game {
 	margin-left: 10%;
 	margin-right: 10%;
-	float: left;
 }
