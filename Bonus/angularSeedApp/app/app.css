@@ -58,3 +58,8 @@ header {
 	margin-left: 25%;
 	margin-right: 25%;
 }
+
+.scoreLabel {
+	font-weight: bold;
+	font-size: 100px;
+}
