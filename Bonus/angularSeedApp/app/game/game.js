@@ -10,8 +10,8 @@ angular.module('myApp.game', ['ngRoute'])
 }])
 
 .controller('gameController', ["$scope", "$interval", "$window", "$document", "playerService", function ($scope, $interval, $window, $document, playerService) {
-    $scope.height = $window.innerHeight * .8;
-    $scope.width = $window.innerWidth * .8;
+    $scope.height = $window.innerHeight * .65;
+    $scope.width = $window.innerWidth * .6;
 
     function Potato(x, y, vX, vY, w, h, vR) {
         this.x = x;
@@ -169,7 +169,7 @@ angular.module('myApp.game', ['ngRoute'])
 
     Paddle.prototype.accelerate = function (up) {
         if (this.turbo) {
-            var accel = 3;
+            var accel = 2;
         } else {
             var accel = 1;
         }
@@ -257,9 +257,9 @@ angular.module('myApp.game', ['ngRoute'])
         if (enable) {
             this.turbo = true;
             if (this.v > 0) {
-                this.v = 3;
+                this.v = 2;
             } else if(this.v < 0){
-                this.v = -3;
+                this.v = -2;
             }
         } else {
             this.turbo = false;
