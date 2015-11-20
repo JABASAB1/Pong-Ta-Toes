@@ -1,0 +1,18 @@
+﻿<div>
+  <h3>Scores</h3>
+
+    <table class="table table-bordered" align="center">
+        <tr>
+            <th>Player One Name</th>
+            <th>Player One Score</th>
+            <th>Player Two Name</th>
+            <th>Player Two Score</th>
+        </tr>
+        <tr ng-repeat="score in scores">
+            <td>{{score.playerOneName}}</td>
+            <td>{{score.playerOneScore}}</td>
+            <td>{{score.playerTwoName}}</td>
+            <td>{{score.playerTwoScore}}</td>
+        </tr>
+    </table>
+</div>

@@ -7,6 +7,7 @@ angular.module('myApp', [
   'myApp.home',
   'myApp.upload',
   'myApp.about',
+  'myApp.scores',
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {

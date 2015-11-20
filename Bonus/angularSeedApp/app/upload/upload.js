@@ -15,7 +15,7 @@ angular.module('myApp.upload', ['ngRoute'])
     $scope.playerOneName = playerService.getPlayerOneName();
     $scope.playerTwoName = playerService.getPlayerTwoName();
 
-    $scope.debug = function () {
+    $scope.saveSettings = function () {
         playerService.setPlayerOneImage($scope.playerOneImage);
         playerService.setPlayerTwoImage($scope.playerTwoImage);
         playerService.setPlayerOneName($scope.playerOneName);
