@@ -9,7 +9,7 @@ angular.module('myApp.game', ['ngRoute'])
     });
 }])
 
-.controller('gameController', ["$scope", "$interval", "$window", "$document", "playerService", function ($scope, $interval, $window, $document, playerService) {
+.controller('gameController', ["$scope", "$interval", "$window", "$document", "playerService", "$rootScope", function ($scope, $interval, $window, $document, playerService, $rootScope) {
     $scope.height = $window.innerHeight * .65;
     $scope.width = $window.innerWidth * .6;
 
@@ -103,10 +103,12 @@ angular.module('myApp.game', ['ngRoute'])
         if (this.x < 0) {
             $scope.player2.awardPoint();
             playerService.setPlayerTwoScore($scope.player2.score);
+            $rootScope.$broadcast('scoreChange');
             $scope.potato = new Potato(potatoX, potatoY, -.5, 0, potatoWidth, potatoHeight, -.1);
         } else if (this.x + this.w > $scope.width) {
             $scope.player1.awardPoint();
             playerService.setPlayerOneScore($scope.player1.score);
+            $rootScope.$broadcast('scoreChange');
             $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
         }
     }

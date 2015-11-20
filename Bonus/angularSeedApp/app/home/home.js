@@ -8,7 +8,7 @@ angular.module('myApp.home', ['ngRoute'])
         controller: 'homeController'
     });
 }])
-.controller('homeController', ["$scope", "$interval", "$window", "playerService", function ($scope, $interval, $window, playerService) { 
+.controller('homeController', ["$scope", "$interval", "$window", "playerService", "$rootScope", function ($scope, $interval, $window, playerService, $rootScope) { 
 
 $scope.player1score = playerService.getPlayerOneScore();
 $scope.player2score = playerService.getPlayerTwoScore();
@@ -30,6 +30,10 @@ $scope.audioFiles = [{
 //$scope.selectedAudio = './audio/MashedTaters.mp3';
 $scope.selectedAudio = "";
 
+$rootScope.$on('scoreChange', function() {
+	$scope.player1score = playerService.getPlayerOneScore();
+	$scope.player2score = playerService.getPlayerTwoScore();
+});
 
 }]);
 
