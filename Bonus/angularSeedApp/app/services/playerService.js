@@ -13,7 +13,7 @@
     };
     
     this.setPlayerOneImage = function (newImage) {
-        this.playerOneImage = newImage;
+        playerOneImage = newImage;
     };
 
     this.getPlayerTwoImage = function () {
@@ -21,22 +21,38 @@
     };
     
     this.setPlayerTwoImage = function (newImage) {
-        this.playerTwoImage = newImage;
+        playerTwoImage = newImage;
     };
 
     this.getPlayerOneName = function () {
         return playerOneName;
     };
 
+    this.setPlayerOneName = function (newName) {
+        playerOneName = newName;
+    };
+
     this.getPlayerTwoName = function () {
         return playerTwoName;
+    };
+
+    this.setPlayerTwoName = function (newName) {
+        playerTwoName = newName;
     };
 
     this.getPlayerOneScore = function () {
         return playerOneScore;
     };
 
+    this.setPlayerOneScore = function (newScore) {
+        playerOneScore = newScore;
+    };
+
     this.getPlayerTwoScore = function () {
         return playerTwoScore;
     }
+
+    this.setPlayerTwoScore = function (newScore) {
+        playerTwoScore = newScore;
+    };
 });

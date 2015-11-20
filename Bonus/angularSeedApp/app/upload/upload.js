@@ -12,7 +12,13 @@ angular.module('myApp.upload', ['ngRoute'])
     $scope.playerOneImage = playerService.getPlayerOneImage();
     $scope.playerTwoImage = playerService.getPlayerTwoImage();
 
+    $scope.playerOneName = playerService.getPlayerOneName();
+    $scope.playerTwoName = playerService.getPlayerTwoName();
+
     $scope.debug = function () {
-        alert("Sam Picture: " + $scope.playerOneImage + " Gollum Picture: " + $scope.playerTwoImage);
+        playerService.setPlayerOneImage($scope.playerOneImage);
+        playerService.setPlayerTwoImage($scope.playerTwoImage);
+        playerService.setPlayerOneName($scope.playerOneName);
+        playerService.setPlayerTwoName($scope.playerTwoName
     }
 }]);
