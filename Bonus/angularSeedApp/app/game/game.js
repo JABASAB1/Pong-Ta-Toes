@@ -13,13 +13,15 @@ angular.module('myApp.game', ['ngRoute'])
     $scope.height = $window.innerHeight * .8;
     $scope.width = $window.innerWidth * .8;
 
-    function Potato(x, y, vX, vY, w, h) {
+    function Potato(x, y, vX, vY, w, h, vR) {
         this.x = x;
         this.y = y;
         this.vX = vX;
         this.vY = vY;
         this.w = w;
         this.h = h;
+        this.r = 0;
+        this.vR = vR;
     };
 
     Potato.prototype.getCoordinates = function () {
@@ -63,7 +65,8 @@ angular.module('myApp.game', ['ngRoute'])
                 }
             }
 
-            this.vY = startingV + paddle.getVelocity()/2;
+            this.vY = startingV + paddle.getVelocity() / 2;
+            this.vR = this.vR + paddle.getVelocity() / 2;
 
         } else {
             this.vY = this.vY * -1;
@@ -93,15 +96,16 @@ angular.module('myApp.game', ['ngRoute'])
             }
         }
 
+        this.r += this.vR;
         this.x += this.vX;
         this.y += this.vY;
 
         if (this.x < 0) {
             $scope.player2.awardPoint();
-            $scope.potato = new Potato(potatoX, potatoY, -.5, 0, potatoWidth, potatoHeight);
+            $scope.potato = new Potato(potatoX, potatoY, -.5, 0, potatoWidth, potatoHeight, .1);
         } else if (this.x + this.w > $scope.width) {
             $scope.player1.awardPoint();
-            $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight);
+            $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
         }
     }
 
@@ -115,7 +119,7 @@ angular.module('myApp.game', ['ngRoute'])
     var potatoX = ($scope.width / 2) - (potatoWidth / 2);
     var potatoY = ($scope.height / 2) - (potatoHeight / 2);
 
-    $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight);
+    $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
 
     $interval(function () {
         $scope.potato.move();
