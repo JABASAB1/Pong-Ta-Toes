@@ -1,8 +1,8 @@
 <div ng-controller="gameController">
     <div style="text-align:center">
-        <input style="margin-bottom:10px;" type="button" value="Start Game" ng-click="startGame();"/>
-        <input style="margin-bottom:10px;display:none" type="button" value="Pause" />
-        <input style="margin-bottom:10px;display:none" type="button" value="Reset" />
+        <input style="margin-bottom:10px;display:{{startButtonDisplay}}" type="button" value="Start Game" ng-click="startGame();" />
+        <input style="margin-bottom:10px;display:{{pauseButtonDisplay}}" type="button" value="{{pauseButtonText}}" ng-click="pauseGame();" />
+        <input style="margin-bottom:10px;display:{{resetButtonDisplay}}" type="button" value="Restart" ng-click="startGame();" />
     </div>
 
     <svg style="background-color:white" ng-attr-height="{{height}}" ng-attr-width="{{width}}" xlmns="http://www.w3.org/2000/svg">

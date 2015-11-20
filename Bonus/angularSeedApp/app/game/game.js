@@ -123,16 +123,61 @@ angular.module('myApp.game', ['ngRoute'])
     var potatoX = ($scope.width / 2) - (potatoWidth / 2);
     var potatoY = ($scope.height / 2) - (potatoHeight / 2);
 
+    $scope.startButtonDisplay = '';
+    $scope.pauseButtonDisplay = 'none';
+    $scope.resetButtonDisplay = 'none';
+    $scope.pauseButtonText = 'Pause';
+    
+    var paddleWidth = $scope.width / 50;
+    var paddleHeight = $scope.height / 5;
+    var paddle1X = paddleWidth;
+    var paddle2X = $scope.width - paddleWidth*2;
+    var paddleY = ($scope.height / 2) - (paddleHeight / 2);
 
     $scope.startGame = function () {
 
-        $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
+        playerService.setPlayerOneScore(0);
+        playerService.setPlayerTwoScore(0);
+        $rootScope.$broadcast('scoreChange');
 
-        $interval(function () {
-            $scope.potato.move();
-            $scope.player1.getPaddle().move();
-            $scope.player2.getPaddle().move();
+        $scope.paused = false;
+        $scope.pauseButtonText = 'Pause';
+        $scope.startButtonDisplay = 'none';
+        $scope.pauseButtonDisplay = '';
+        $scope.resetButtonDisplay = '';
+
+        $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
+        
+        var paddle1 = new Paddle(paddle1X, paddleY, 0, paddleWidth, paddleHeight, 'green');
+
+        var paddle2 = new Paddle(paddle2X, paddleY, 0, paddleWidth, paddleHeight, 'red');
+
+        $scope.player1 = new Player(paddle1, 0);
+        $scope.player2 = new Player(paddle2, 0);
+
+        if ($scope.gameInterval) {
+            $scope.gameInterval.cancel();
+        }
+
+        $scope.gameInterval = $interval(function () {
+            if (!$scope.paused) {
+                $scope.potato.move();
+                $scope.player1.getPaddle().move();
+                $scope.player2.getPaddle().move();
+            }
         }, 5);
+    };
+
+    $scope.pauseGame = function () {
+        if ($scope.player1){
+            if ($scope.paused) {
+                $scope.paused = false;
+                $scope.pauseButtonText = "Pause"
+            } else {
+                $scope.paused = true;
+                $scope.pauseButtonText = "Resume"
+            }
+        }
     };
 
     function Player(paddle, score) {
@@ -198,12 +243,6 @@ angular.module('myApp.game', ['ngRoute'])
     Paddle.prototype.getVelocity = function () {
         return this.v;
     }
-
-    var paddleWidth = $scope.width / 50;
-    var paddleHeight = $scope.height / 5;
-    var paddle1X = paddleWidth;
-    var paddle2X = $scope.width - paddleWidth*2;
-    var paddleY = ($scope.height / 2) - (paddleHeight / 2);
     
     Paddle.prototype.move = function () {
         if (this.y + this.v >= 5 && this.y + this.v + this.h <= $scope.height-5) {
@@ -277,60 +316,57 @@ angular.module('myApp.game', ['ngRoute'])
         }
     }
 
-    var paddle1 = new Paddle(paddle1X, paddleY, 0, paddleWidth, paddleHeight, 'green');
-
-    var paddle2 = new Paddle(paddle2X, paddleY, 0, paddleWidth, paddleHeight, 'red');
-
-    $scope.player1 = new Player(paddle1, 0);
-    $scope.player2 = new Player(paddle2, 0);
-
     $document.bind('keydown', function (e) {
         switch (e.which) {
             case 38:
                 //up
-                paddle2.accelerate(true);
+                $scope.player2.getPaddle().accelerate(true);
                 break;
             case 40:
-                paddle2.accelerate(false);
+                $scope.player2.getPaddle().accelerate(false);
                 //down
                 break;
             case 37:
                 //left
-                paddle2.powerHit(true);
+                $scope.player2.getPaddle().powerHit(true);
                 break;
             case 83:
                 //up
-                paddle1.accelerate(true);
+                $scope.player1.getPaddle().accelerate(true);
                 break;
             case 88:
                 //down
-                paddle1.accelerate(false);
+                $scope.player1.getPaddle().accelerate(false);
                 break;
             case 68:
             case 67:
                 //right
-                paddle1.powerHit(false);
+                $scope.player1.getPaddle().powerHit(false);
                 break;
-        }
+            case 80:
+                //pause
+                $scope.pauseGame();
+                break;
+            }
     });
 
     $document.bind('keyup', function (e) {
         switch (e.which) {
             case 38:
                 //up
-                paddle2.stop(true);
+                $scope.player2.getPaddle().stop(true);
                 break;
             case 40:
                 //down
-                paddle2.stop(false);
+                $scope.player2.getPaddle().stop(false);
                 break;
             case 83:
                 //up
-                paddle1.stop(true);
+                $scope.player1.getPaddle().stop(true);
                 break;
             case 88:
                 //down
-                paddle1.stop(false);
+                $scope.player1.getPaddle().stop(false);
                 break;
         }
     });
