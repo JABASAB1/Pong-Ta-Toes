@@ -123,13 +123,17 @@ angular.module('myApp.game', ['ngRoute'])
     var potatoX = ($scope.width / 2) - (potatoWidth / 2);
     var potatoY = ($scope.height / 2) - (potatoHeight / 2);
 
-    $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
 
-    $interval(function () {
-        $scope.potato.move();
-        $scope.player1.getPaddle().move();
-        $scope.player2.getPaddle().move();
-    }, 5);
+    $scope.startGame = function () {
+
+        $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
+
+        $interval(function () {
+            $scope.potato.move();
+            $scope.player1.getPaddle().move();
+            $scope.player2.getPaddle().move();
+        }, 5);
+    };
 
     function Player(paddle, score) {
         this.paddle = paddle;
