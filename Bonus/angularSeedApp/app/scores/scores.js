@@ -31,7 +31,8 @@ angular.module('myApp.scores', ['ngRoute'])
         //localStorage.getItem('scoresHistory');
 
 
-    $rootScope.$on('gameEnd', function() {
+    $rootScope.$on('gameEnd', function () {
+        alert("here");
         var player1score = playerService.getPlayerOneScore();
         var player2score = playerService.getPlayerTwoScore();
         var player1name = playerService.getPlayerOneName();
