@@ -8,9 +8,9 @@ angular.module('myApp.upload', ['ngRoute'])
         controller: 'uploadController'
     });
 }])
-.controller('uploadController', ["$scope", "$interval", "$window", "pictureService", function ($scope, $interval, $window, pictureService) {
-    $scope.playerOneImage = pictureService.getPlayerOneImage();
-    $scope.playerTwoImage = pictureService.getPlayerTwoImage();
+.controller('uploadController', ["$scope", "$interval", "$window", "playerService", function ($scope, $interval, $window, playerService) {
+    $scope.playerOneImage = playerService.getPlayerOneImage();
+    $scope.playerTwoImage = playerService.getPlayerTwoImage();
 
     $scope.debug = function () {
         alert("Sam Picture: " + $scope.playerOneImage + " Gollum Picture: " + $scope.playerTwoImage);
