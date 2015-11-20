@@ -34,8 +34,6 @@ header {
 }
 
 .player {
-	margin-left: auto;
-	margin-right: auto;
 	text-align: center;
 }
 
@@ -44,16 +42,19 @@ header {
 }
 
 #player2 {
-	float: left;
+	float: right;
 }
 
 #players {
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #game {
-	margin-left: 10%;
-	margin-right: 10%;
 	float: left;
+}
+
+#playerSettingsForm {
+	margin-left: auto;
+	margin-right: auto;
 }
