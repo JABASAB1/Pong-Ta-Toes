@@ -118,11 +118,28 @@ angular.module('myApp.game', ['ngRoute'])
             $scope.player2.awardPoint();
             playerService.setPlayerTwoScore($scope.player2.score);
             $rootScope.$broadcast('scoreChange');
+
+            $scope.message = "Boil 'em, mash 'em!";
+
+            $scope.messageDisplay = "";
+
+            $interval(function () {
+                $scope.messageDisplay = "none";
+            }, 1000, 1);
+
             $scope.potato = new Potato(potatoX, potatoY, -.5, 0, potatoWidth, potatoHeight, -.1);
         } else if (this.x + this.w > $scope.width) {
             $scope.player1.awardPoint();
             playerService.setPlayerOneScore($scope.player1.score);
             $rootScope.$broadcast('scoreChange');
+
+            $scope.message = "Boil 'em, mash 'em!";
+            $scope.messageDisplay = "";
+
+            $interval(function () {
+                $scope.messageDisplay = "none";
+            }, 1000, 1);
+
             $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
         }
     }
