@@ -102,7 +102,7 @@ angular.module('myApp.game', ['ngRoute'])
 
         if (this.x < 0) {
             $scope.player2.awardPoint();
-            $scope.potato = new Potato(potatoX, potatoY, -.5, 0, potatoWidth, potatoHeight, .1);
+            $scope.potato = new Potato(potatoX, potatoY, -.5, 0, potatoWidth, potatoHeight, -.1);
         } else if (this.x + this.w > $scope.width) {
             $scope.player1.awardPoint();
             $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
@@ -153,6 +153,7 @@ angular.module('myApp.game', ['ngRoute'])
         $interval(function () {
             p.hit = true;
             p.color = color;
+            p.toggleTurbo(true);
         }, 10000, 1);
     }
 
@@ -165,10 +166,16 @@ angular.module('myApp.game', ['ngRoute'])
     }
 
     Paddle.prototype.accelerate = function (up) {
-        if (up) {
-            this.v = -1;
+        if (this.turbo) {
+            var accel = 3;
         } else {
-            this.v = 1;
+            var accel = 1;
+        }
+
+        if (up) {
+            this.v = -1 * accel;
+        } else {
+            this.v = 1 * accel;
         }
     }
 
@@ -233,12 +240,32 @@ angular.module('myApp.game', ['ngRoute'])
                 }
                 p.power = false;
                 p.color = "Black";
+                p.toggleTurbo(false);
             }, 100, 1);
 
             $interval(function () {
                 p.hit = true;
                 p.color = color;
+                p.toggleTurbo(true);
             }, 10000, 1);
+        }
+    }
+
+    Paddle.prototype.toggleTurbo = function (enable) {
+        if (enable) {
+            this.turbo = true;
+            if (this.v > 0) {
+                this.v = 3;
+            } else if(this.v < 0){
+                this.v = -3;
+            }
+        } else {
+            this.turbo = false;
+            if (this.v > 0) {
+                this.v = 1;
+            } else if (this.v < 0) {
+                this.v = -1;
+            }
         }
     }
 
