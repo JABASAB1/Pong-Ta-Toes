@@ -11,9 +11,17 @@
     this.getPlayerOneImage = function () {
         return playerOneImage;
     };
+    
+    this.setPlayerOneImage = function (newImage) {
+        this.playerOneImage = newImage;
+    };
 
     this.getPlayerTwoImage = function () {
         return playerTwoImage;
+    };
+    
+    this.setPlayerTwoImage = function (newImage) {
+        this.playerTwoImage = newImage;
     };
 
     this.getPlayerOneName = function () {
