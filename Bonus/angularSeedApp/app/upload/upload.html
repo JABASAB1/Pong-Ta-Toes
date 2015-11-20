@@ -1,14 +1,24 @@
-<p>Click here to upload your own pictures!</p>
-<span>
-    <label>Sam URL: </label>
-    <input ng-model="playerOneImage" />
-    <label>Gollum URL: </label>
-    <input ng-model="playerTwoImage" />
+<p>Change Player Settings</p>
 
-    <label>Sam Name: </label>
-    <input ng-model="playerOneName" />
-    <label>Gollum Name: </label>
-    <input ng-model="playerTwoName" />
-</span>
+<form name="playerSettingsForm" id="playerSettingsForm" novalidate>
+    <div id="playerOneSettings">
+        <h3>Player One:</h3>
+        <label>Name: </label>
+        <input ng-model="playerOneName" />
+        <br />
+        <label>Picture URL: </label>
+        <input ng-model="playerOneImage" />
+    </div>
+    <div id="playerTwoSettings">
+        <h3>Player Two:</h3>
+        <label>Name: </label>
+        <input ng-model="playerTwoName" />
+        <br />
+        <label>Picture URL: </label>
+        <input ng-model="playerTwoImage" />
+    </div>
+</form>
+
+
 
 <button ng-click="debug()">Click Me!</button>
