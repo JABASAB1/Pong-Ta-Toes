@@ -10,5 +10,7 @@
         <rect ng-attr-x="{{player1.getPaddle().getCoordinates().x}}" ng-attr-y="{{player1.getPaddle().getCoordinates().y}}" ng-attr-width="{{player1.getPaddle().getSize().w}}" ng-attr-height="{{player1.getPaddle().getSize().h}}" ng-attr-fill="{{player1.getPaddle().color}}" stroke="green"></rect>'
         <rect ng-attr-x="{{player2.getPaddle().getCoordinates().x}}" ng-attr-y="{{player2.getPaddle().getCoordinates().y}}" ng-attr-width="{{player2.getPaddle().getSize().w}}" ng-attr-height="{{player2.getPaddle().getSize().h}}" ng-attr-fill="{{player2.getPaddle().color}}" stroke="red"></rect>
         <rect ng-attr-x="0" ng-attr-y="0" ng-attr-width="{{width}}" ng-attr-height="{{height}}" fill="none" stroke="black"></rect>
+
+        <text ng-attr-style="display:{{messageDisplay}}" textLength="{{width/2}}" ng-attr-x="{{width/4}}" ng-attr-y="{{height/2}}" fill="black" font-size="36">{{message}}</text>
     </svg>
 </div>

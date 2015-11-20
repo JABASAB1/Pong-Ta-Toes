@@ -13,6 +13,19 @@ angular.module('myApp.game', ['ngRoute'])
     $scope.height = $window.innerHeight * .65;
     $scope.width = $window.innerWidth * .6;
 
+    var messages = ['Spudtastic!','Taterrific!','Sweet! (potato)', 'Un-poto-lievable!','Tuberful!','Gravy!']
+
+    var showRandomMessage = function () {
+        
+        var r = Math.round(Math.random() * 5);
+        $scope.message = messages[r];
+        $scope.messageDisplay = "";
+
+        $interval(function () {
+            $scope.messageDisplay = "none";
+        }, 1000, 1);
+    }
+
     function Potato(x, y, vX, vY, w, h, vR) {
         this.x = x;
         this.y = y;
@@ -41,6 +54,7 @@ angular.module('myApp.game', ['ngRoute'])
 
         if (paddle) {
             if (paddle.power) {
+                showRandomMessage();
                 if (this.vX > 0) {
                     this.vX += 1;
                 } else {
@@ -155,17 +169,16 @@ angular.module('myApp.game', ['ngRoute'])
         $scope.player1 = new Player(paddle1, 0);
         $scope.player2 = new Player(paddle2, 0);
 
-        if ($scope.gameInterval) {
-            $scope.gameInterval.cancel();
-        }
+        if (!$scope.gameInterval) {
 
-        $scope.gameInterval = $interval(function () {
-            if (!$scope.paused) {
-                $scope.potato.move();
-                $scope.player1.getPaddle().move();
-                $scope.player2.getPaddle().move();
-            }
-        }, 5);
+            $scope.gameInterval = $interval(function () {
+                if (!$scope.paused) {
+                    $scope.potato.move();
+                    $scope.player1.getPaddle().move();
+                    $scope.player2.getPaddle().move();
+                }
+             }, 5);
+         }
     };
 
     $scope.pauseGame = function () {
@@ -253,13 +266,13 @@ angular.module('myApp.game', ['ngRoute'])
     Paddle.prototype.collide = function (potato) {
         if (potato.getVelocity().x > 0) {
             if (potato.getCoordinates().x + potato.getSize().w > this.x) {
-                if (potato.getCoordinates().y + potato.getSize().h > this.y && potato.getCoordinates().y < this.y + this.h) {
+                if(potato.getCoordinates().y +potato.getSize().h > this.y && potato.getCoordinates().y < this.y +this.h) {
                     return true;
                 }
             }
         } else {
             if (potato.getCoordinates().x < this.x + this.w) {
-                if (potato.getCoordinates().y + potato.getSize().h > this.y && potato.getCoordinates().y < this.y + this.h) {
+                if (potato.getCoordinates().y +potato.getSize().h > this.y && potato.getCoordinates().y < this.y +this.h) {
                     return true;
                 }
             }
@@ -317,40 +330,43 @@ angular.module('myApp.game', ['ngRoute'])
     }
 
     $document.bind('keydown', function (e) {
-        switch (e.which) {
-            case 38:
-                //up
-                $scope.player2.getPaddle().accelerate(true);
-                break;
-            case 40:
-                $scope.player2.getPaddle().accelerate(false);
-                //down
-                break;
-            case 37:
-                //left
-                $scope.player2.getPaddle().powerHit(true);
-                break;
-            case 83:
-                //up
-                $scope.player1.getPaddle().accelerate(true);
-                break;
-            case 88:
-                //down
-                $scope.player1.getPaddle().accelerate(false);
-                break;
-            case 68:
-            case 67:
-                //right
-                $scope.player1.getPaddle().powerHit(false);
-                break;
-            case 80:
-                //pause
-                $scope.pauseGame();
-                break;
+        if ($scope.player1){
+            switch (e.which) {
+                case 38:
+                    //up
+                    $scope.player2.getPaddle().accelerate(true);
+                    break;
+                case 40:
+                    $scope.player2.getPaddle().accelerate(false);
+                    //down
+                    break;
+                case 37:
+                    //left
+                    $scope.player2.getPaddle().powerHit(true);
+                    break;
+                case 83:
+                    //up
+                    $scope.player1.getPaddle().accelerate(true);
+                    break;
+                case 88:
+                    //down
+                    $scope.player1.getPaddle().accelerate(false);
+                    break;
+                case 68:
+                case 67:
+                    //right
+                    $scope.player1.getPaddle().powerHit(false);
+                    break;
+                case 80:
+                    //pause
+                    $scope.pauseGame();
+                    break;
+                }
             }
     });
 
     $document.bind('keyup', function (e) {
+        if ($scope.player1){
         switch (e.which) {
             case 38:
                 //up
@@ -368,6 +384,7 @@ angular.module('myApp.game', ['ngRoute'])
                 //down
                 $scope.player1.getPaddle().stop(false);
                 break;
+            }
         }
     });
 
