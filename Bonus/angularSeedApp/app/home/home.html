@@ -11,6 +11,10 @@
 		
 		</div>
 		
+		<div id="game" ng-include src="'./game/game.html'">
+			<!-- game goes here -->
+		</div>
+		
 		<div id="player2" class="player">
 		
 			<h3>{{player2name}}</h3>
@@ -23,9 +27,7 @@
 	</div>
 
 	<br />
+	<div class="clearfix"></div>
 
-	<div id="game" class="clearfix" ng-include src="'./game/game.html'">
-		<!-- game goes here -->
-	</div>
 
 </div>
