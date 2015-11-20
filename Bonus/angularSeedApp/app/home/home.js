@@ -5,22 +5,21 @@ angular.module('myApp.home', ['ngRoute'])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/home', {
         templateUrl: 'home/home.html',
-        controller: 'homeController',
-        controllerAs: 'homeController'
+        controller: 'homeController'
     });
 }])
-.controller('homeController', ["$interval", "$window", "playerService", function ($interval, $window, playerService) { 
+.controller('homeController', ["$scope", "$interval", "$window", "playerService", function ($scope, $interval, $window, playerService) { 
 
-this.player1score = playerService.getPlayerOneScore();
-this.player2score = playerService.getPlayerTwoScore();
+$scope.player1score = playerService.getPlayerOneScore();
+$scope.player2score = playerService.getPlayerTwoScore();
 
-this.player1image = playerService.getPlayerOneImage();
-this.player2image = playerService.getPlayerTwoImage();
+$scope.player1image = playerService.getPlayerOneImage();
+$scope.player2image = playerService.getPlayerTwoImage();
 
-this.player1name = playerService.getPlayerOneName();
-this.player2name = playerService.getPlayerTwoName();
+$scope.player1name = playerService.getPlayerOneName();
+$scope.player2name = playerService.getPlayerTwoName();
 
-this.audioFiles = [{
+$scope.audioFiles = [{
 	name: 'Potato Song [Default]',
 	file: './audio/MashedTaters.mp3'
 }, {
@@ -29,7 +28,7 @@ this.audioFiles = [{
 }];
 
 //$scope.selectedAudio = './audio/MashedTaters.mp3';
-this.selectedAudio = "";
+$scope.selectedAudio = "";
 
 
 }]);
