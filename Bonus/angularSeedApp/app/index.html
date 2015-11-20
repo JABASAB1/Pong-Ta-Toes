@@ -2,7 +2,8 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,17 +15,35 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
+<body bgcolor="#FFF8C6">
 
-<nav>
-	<menu>
-  <ul class="menu">
-    <li><a href="#/home">Home</a></li>
-    <li><a href="#/upload">Upload</a></li>
-    <li><a href="#/game">About</a></li>
-  </ul>
-	</menu>
-</nav>
+<header>
+
+       
+	<img src="./images/po-ta-toe-banner.png" style="float: left; margin-left: 10px; margin-right: 30px;" height="100px" width="450px" />
+	<h1>Pong-Ta-Toes</h1>
+
+	<nav>
+		<menu>
+		  <ul class="menu">
+		    <li><a href="#/home">Home</a></li>
+		    <li><a href="#/upload">Upload</a></li>
+		    <li><a href="#/game">About</a></li>
+		  </ul>
+		</menu>
+	</nav>
+
+	<audio controls="controls" preload="none" autoplay loop style="float: right; margin-right: 20px;">
+	  <source type="audio/mpeg" src="./audio/MashedTaters.mp3"/>
+	  <!-- <source type="audio/mpeg" ng-src="{{selectedAudio}}"/> -->
+	</audio>
+<!--     <label for="audioSelect">Change Audio: {{selectedAudio}}</label><br>
+    <select name="audioSelect" ng-model="selectedAudio" ng-init="selectedAudio='./audio/MashedTaters.mp3'">
+      <option value="./audio/MashedTaters.mp3">Potato Song [Default]</option>
+      <option value="./audio/BridgeOfKhazadDum-8-bit.mp3">8-Bit Bridge of Khazad Dum</option>
+    </select><br /> -->
+
+</header>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
