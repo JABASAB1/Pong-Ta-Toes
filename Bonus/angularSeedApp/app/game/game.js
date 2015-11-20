@@ -13,11 +13,11 @@ angular.module('myApp.game', ['ngRoute'])
     $scope.height = $window.innerHeight * .65;
     $scope.width = $window.innerWidth * .6;
 
-    var messages = ['Spudtastic!','Taterrific!','Sweet! (potato)', 'Un-poto-lievable!','Tuberful!','Gravy!']
+    var messages = ['Spudtastic!','Taterrific!','Sweet! (potato)', 'Tuberful!','Gravy!']
 
     var showRandomMessage = function () {
         
-        var r = Math.round(Math.random() * 5);
+        var r = Math.round(Math.random() * 4);
         $scope.message = messages[r];
         $scope.messageDisplay = "";
 
@@ -119,28 +119,60 @@ angular.module('myApp.game', ['ngRoute'])
             playerService.setPlayerTwoScore($scope.player2.score);
             $rootScope.$broadcast('scoreChange');
 
-            $scope.message = "Boil 'em, mash 'em!";
+            if ($scope.player2.score == 5) {
+                $scope.message = playerService.getPlayerTwoName() + " wins!";
+                $scope.messageDisplay = "";
 
-            $scope.messageDisplay = "";
+                $scope.paused = true;
+                $scope.pauseButtonText = 'Pause';
+                $scope.startButtonDisplay = 'none';
+                $scope.pauseButtonDisplay = 'none';
+                $scope.resetButtonDisplay = '';
 
-            $interval(function () {
-                $scope.messageDisplay = "none";
-            }, 1000, 1);
+                $scope.player1 = null;
+                $scope.player2 = null;
 
-            $scope.potato = new Potato(potatoX, potatoY, -.5, 0, potatoWidth, potatoHeight, -.1);
+            } else {
+
+                $scope.message = "Boil 'em, mash 'em!";
+
+                $scope.messageDisplay = "";
+
+                $interval(function () {
+                    $scope.messageDisplay = "none";
+                }, 1000, 1);
+
+                $scope.potato = new Potato(potatoX, potatoY, -.5, 0, potatoWidth, potatoHeight, -.1);
+
+            }
         } else if (this.x + this.w > $scope.width) {
             $scope.player1.awardPoint();
             playerService.setPlayerOneScore($scope.player1.score);
             $rootScope.$broadcast('scoreChange');
 
-            $scope.message = "Boil 'em, mash 'em!";
-            $scope.messageDisplay = "";
+            if ($scope.player1.score == 5) {
+                $scope.message = playerService.getPlayerOneName() + " wins!";
+                $scope.messageDisplay = "";
 
-            $interval(function () {
-                $scope.messageDisplay = "none";
-            }, 1000, 1);
+                $scope.paused = true;
+                $scope.pauseButtonText = 'Pause';
+                $scope.startButtonDisplay = 'none';
+                $scope.pauseButtonDisplay = 'none';
+                $scope.resetButtonDisplay = '';
 
-            $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
+                $scope.player1 = null;
+                $scope.player2 = null;
+
+            } else {
+
+                $scope.message = "Boil 'em, mash 'em!";
+                $scope.messageDisplay = "";
+
+                $interval(function () {
+                    $scope.messageDisplay = "none";
+                    }, 1000, 1);
+               $scope.potato = new Potato(potatoX, potatoY, .5, 0, potatoWidth, potatoHeight, .1);
+             }
         }
     }
 
@@ -167,6 +199,8 @@ angular.module('myApp.game', ['ngRoute'])
 
     $scope.startGame = function () {
 
+        $scope.messageDisplay = "none";
+
         playerService.setPlayerOneScore(0);
         playerService.setPlayerTwoScore(0);
         $rootScope.$broadcast('scoreChange');
@@ -190,9 +224,9 @@ angular.module('myApp.game', ['ngRoute'])
 
             $scope.gameInterval = $interval(function () {
                 if (!$scope.paused) {
-                    $scope.potato.move();
                     $scope.player1.getPaddle().move();
                     $scope.player2.getPaddle().move();
+                    $scope.potato.move();
                 }
              }, 5);
          }
