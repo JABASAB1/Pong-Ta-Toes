@@ -2,6 +2,9 @@
     var playerOneImage = "Unset";
     var playerTwoImage = "Unset";
 
+    var playerOneName = "Sam";
+    var playerTwoName = "Gollum"
+
     this.getPlayerOneImage = function () {
         return playerOneImage;
     };
