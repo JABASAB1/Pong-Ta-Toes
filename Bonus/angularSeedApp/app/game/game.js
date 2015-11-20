@@ -132,6 +132,8 @@ angular.module('myApp.game', ['ngRoute'])
                 $scope.player1 = null;
                 $scope.player2 = null;
 
+                $rootScope.$broadcast('gameEnd');
+
             } else {
 
                 $scope.message = "Boil 'em, mash 'em!";
@@ -162,6 +164,8 @@ angular.module('myApp.game', ['ngRoute'])
 
                 $scope.player1 = null;
                 $scope.player2 = null;
+
+                $rootScope.$broadcast('gameEnd');
 
             } else {
 
