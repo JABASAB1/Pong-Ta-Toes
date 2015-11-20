@@ -1,6 +1,6 @@
 ﻿angular.module('myApp').service('playerService', function () {
-    var playerOneImage = "Unset";
-    var playerTwoImage = "Unset";
+    var playerOneImage = "./images/sam-cartoon.png";;
+    var playerTwoImage = "./images/gollum-cartoon.png";
 
     var playerOneName = "Sam";
     var playerTwoName = "Gollum"

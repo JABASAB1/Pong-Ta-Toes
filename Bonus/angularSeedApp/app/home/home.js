@@ -8,16 +8,16 @@ angular.module('myApp.home', ['ngRoute'])
         controller: 'homeController'
     });
 }])
-.controller('homeController', ["$scope", "$interval", "$window", function ($scope, $interval, $window) { 
+.controller('homeController', ["$scope", "$interval", "$window", "playerService", function ($scope, $interval, $window, playerService) { 
 
-$scope.player1score = 0;
-$scope.player2score = 0;
+$scope.player1score = playerService.getPlayerOneScore();
+$scope.player2score = playerService.getPlayerTwoScore();
 
-$scope.player1image = "./images/sam-cartoon.png";
-$scope.player2image = "./images/gollum-cartoon.png";
+$scope.player1image = playerService.getPlayerOneImage();
+$scope.player2image = playerService.getPlayerTwoImage();
 
-$scope.player1name = "Sam";
-$scope.player2name = "Gollum";
+$scope.player1name = playerService.getPlayerOneName();
+$scope.player2name = playerService.getPlayerTwoName();
 
 $scope.audioFiles = [{
 	name: 'Potato Song [Default]',
