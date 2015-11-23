@@ -11,6 +11,9 @@ angular.module('myApp.game', ['ngRoute'])
 
 .controller('gameController', ["$scope", "$interval", "$window", "$document", "playerService", "$rootScope", function ($scope, $interval, $window, $document, playerService, $rootScope) {
 
+    // Sorry, Doug, for the messy code.  let me know if you have any questions about the logic (howardzacharyj@gmail.com)
+    // I wish I had more time to clean it up or at least add some comments
+
     $scope.$on("$destroy", function () {
         $interval.cancel($scope.gameInterval);
     });
