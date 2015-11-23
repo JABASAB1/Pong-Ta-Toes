@@ -10,6 +10,11 @@ angular.module('myApp.game', ['ngRoute'])
 }])
 
 .controller('gameController', ["$scope", "$interval", "$window", "$document", "playerService", "$rootScope", function ($scope, $interval, $window, $document, playerService, $rootScope) {
+
+    $scope.$on("$destroy", function () {
+        $interval.cancel($scope.gameInterval);
+    });
+
     $scope.height = $window.innerHeight * .65;
     $scope.width = $window.innerWidth * .6;
 
